@@ -1,0 +1,7 @@
+version: "3.4"
+services:
+  eureka-server:
+    image:  waes-assignment/registry-service
+    hostname: eureka-server
+    ports:
+      - "8761:8761"
