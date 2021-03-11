@@ -1,7 +1,18 @@
 version: "3.4"
 services:
-  eureka-server:
+  registry-service:
     image:  waes-assignment/registry-service
-    hostname: eureka-server
+    hostname: registry-service
     ports:
       - "8761:8761"
+
+  data-diff-service:
+    image: waes-assignment/data-diff-service
+    hostname: data-diff-service
+    links:
+      - registry-service
+    ports:
+      - "6379-6385:9999"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registry-service:8761/eureka
+
