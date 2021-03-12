@@ -5,6 +5,7 @@ plugins {
 
 ext {
     set('springCloudVersion', 'Hoxton.SR9')
+    set('swaggerVersion', '2.9.1')
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -18,6 +19,14 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    implementation(group: 'io.springfox', name: 'springfox-swagger2', version: swaggerVersion)
+    implementation(group: 'io.springfox', name: 'springfox-swagger-ui', version: swaggerVersion)
+
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb')
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
