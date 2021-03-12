@@ -13,6 +13,7 @@ services:
       - "6379-6385:9999"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registry-service:8761/eureka
+      SPRING_DATA_MONGODB_URI: mongodb://data_diff_user:waes_assignment@mongo-database:27017/data_diff?retryWrites=true&w=majority
 
   mongo-database:
     container_name: mongo-db
@@ -21,6 +22,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
       MONGO_INITDB_DATABASE: data_diff
+
     ports:
       - 27017:27017
     volumes:

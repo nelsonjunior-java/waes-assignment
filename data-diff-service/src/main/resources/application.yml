@@ -8,6 +8,7 @@ spring:
 
 server:
   port: 0
+  #port: 8384
 eureka:
   instance:
     hostname: localhost
