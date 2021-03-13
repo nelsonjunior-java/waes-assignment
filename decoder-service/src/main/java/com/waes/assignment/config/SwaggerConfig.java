@@ -1,6 +1,6 @@
 package com.waes.assignment.config;
 
-import com.waes.assignment.controller.DiffSaveController;
+import com.waes.assignment.controller.Base64DecoderController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -22,13 +22,14 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(DiffSaveController.class.getPackage().getName()))
+                .apis(RequestHandlerSelectors.basePackage(Base64DecoderController.class.getPackage().getName()))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(
                         new ApiInfoBuilder()
-                                .title("Data Diff API")
-                                .description("Manages base64 encoded data operations")
+                                .title("Decoder API")
+                                .description("API responsible for decoding data")
                                 .build());
     }
+
 }

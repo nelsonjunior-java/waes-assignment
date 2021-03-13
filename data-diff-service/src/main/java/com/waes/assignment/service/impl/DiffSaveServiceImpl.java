@@ -38,7 +38,7 @@ public class DiffSaveServiceImpl implements DiffSaveService {
     @Override
     public DiffRecord saveLeftValue(Long id, String encodedLeftValue) throws BusinessRuleException {
 
-        performBusinessValidations(id, encodedLeftValue);
+        performValidations(id, encodedLeftValue);
 
         //Decode before save
 
@@ -63,7 +63,7 @@ public class DiffSaveServiceImpl implements DiffSaveService {
     @Override
     public DiffRecord saveRightValue(Long id, String encodedRightValue) throws BusinessRuleException {
 
-        performBusinessValidations(id, encodedRightValue);
+        performValidations(id, encodedRightValue);
 
         //Decode before save
 
@@ -85,7 +85,7 @@ public class DiffSaveServiceImpl implements DiffSaveService {
      * @param id provided by upstream system or user
      * @param encodedValue encoded provided by upstream system or user
      */
-    private void performBusinessValidations(Long id, String encodedValue) throws BusinessRuleException {
+    private void performValidations(Long id, String encodedValue) throws BusinessRuleException {
 
         if(id == null){
             throw new BusinessRuleException(messageHelper.get(ERROR_NULL_ID));

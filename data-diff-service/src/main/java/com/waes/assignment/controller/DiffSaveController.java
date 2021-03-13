@@ -29,7 +29,7 @@ public class DiffSaveController {
     }
 
     @PostMapping("/{id}/left")
-    public ResponseEntity<String> saveLeftValue(@PathVariable("id") Long id,@Valid @RequestBody DiffSaveRequest encodedLeftValue) throws BusinessRuleException {
+    public ResponseEntity<String> saveLeftValue(@PathVariable("id") Long id, @Valid @RequestBody DiffSaveRequest encodedLeftValue) throws BusinessRuleException {
 
         log.info("method=saveLeftValue, id={}, id={}", id, encodedLeftValue);
 
