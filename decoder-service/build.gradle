@@ -6,7 +6,6 @@ plugins {
 ext {
     set('springCloudVersion', 'Hoxton.SR9')
     set('swaggerVersion', '2.9.1')
-    set('commonsCodecVersion', '1.15')
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -20,8 +19,6 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-
-    implementation(group: 'commons-codec', name: 'commons-codec', version: commonsCodecVersion)
 
     implementation(group: 'io.springfox', name: 'springfox-swagger2', version: swaggerVersion)
     implementation(group: 'io.springfox', name: 'springfox-swagger-ui', version: swaggerVersion)

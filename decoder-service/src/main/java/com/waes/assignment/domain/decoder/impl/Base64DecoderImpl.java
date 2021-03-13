@@ -1,16 +1,19 @@
 package com.waes.assignment.domain.decoder.impl;
 
 import com.waes.assignment.domain.decoder.Decoder;
-import org.apache.commons.codec.binary.Base64;
+import org.springframework.stereotype.Service;
 
-public class Base64DecoderImpl implements Decoder <String, String>{
+import java.util.Base64;
+
+@Service
+public class Base64DecoderImpl implements Decoder<String, String> {
 
     @Override
     public String decode(String encodedValue) {
 
-        return Base64.decodeBase64(encodedValue).toString();
+        byte[] decodedBytes = Base64.getDecoder().decode(encodedValue);
+        String decodedString = new String(decodedBytes);
+
+        return decodedString;
     }
-
-
-
 }

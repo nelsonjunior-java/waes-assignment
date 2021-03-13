@@ -5,6 +5,7 @@ import com.waes.assignment.domain.exception.BadRequestException;
 import com.waes.assignment.domain.message.MessageHelper;
 import com.waes.assignment.service.Base64DecoderService;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import static com.waes.assignment.domain.message.MessageCode.ERROR_EMPTY_ENCODED_VALUE;
@@ -13,6 +14,7 @@ import static com.waes.assignment.domain.message.MessageCode.ERROR_NOT_BASE64_EN
 /**
  * This class is an implementation of the Base64DecoderService
  */
+@Service
 public class Base64DecoderServiceImpl implements Base64DecoderService {
 
     private final Decoder<String, String> decoder;

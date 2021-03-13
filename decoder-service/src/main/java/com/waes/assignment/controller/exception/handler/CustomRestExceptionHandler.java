@@ -1,5 +1,6 @@
 package com.waes.assignment.controller.exception.handler;
 
+import com.waes.assignment.domain.exception.BadRequestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -16,6 +17,16 @@ import java.util.List;
 @Slf4j
 @ControllerAdvice("com.waes.assignment")
 public class CustomRestExceptionHandler {
+
+    @ResponseBody
+    @ExceptionHandler(value = BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleBadRequestException(final BadRequestException exception) {
+
+        log.error("method=handleBadRequestException, exception={} ", exception.getMessage());
+
+        return new ErrorResponse(exception.getMessage());
+    }
 
     @ResponseBody
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
