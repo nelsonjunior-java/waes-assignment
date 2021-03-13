@@ -1,18 +1,14 @@
-# Configuring the data-diff-service
+# Configuring the decoder-service
 spring:
   application:
-    name: data-diff-service
-  data:
-    mongodb:
-      password: 'waes_assignment'
-      uri: mongodb://data_diff_user:${spring.data.mongodb.password}@localhost:27017/data_diff?retryWrites=true&w=majority
+    name: decoder-service
 
 server:
   port: 0
-  #port: 8384
+
 eureka:
   instance:
-    hostname: localhost
+    hostname: localhost #hostname used for local tests only, when running with docker-compose this value will be replaced by the the one defined in the env variable
     instanceId: ${spring.application.name}:${eureka.instance.hostname}:${random.value}
   client:
     serviceUrl:

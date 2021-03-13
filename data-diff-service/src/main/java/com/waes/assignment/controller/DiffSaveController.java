@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+/**
+ * REST endpoints for saving the decoded value of an endoded64 data
+ * in a left and right endpoint, each representing a different value to be compared in another endpoint
+ */
 @RestController
 @RequestMapping("/v1/diff")
 @Slf4j

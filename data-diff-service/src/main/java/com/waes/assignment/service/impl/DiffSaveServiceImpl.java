@@ -42,7 +42,6 @@ public class DiffSaveServiceImpl implements DiffSaveService {
 
         //Decode before save
 
-        //Find by id
         final var diffRecordFound = dataDiffRepository.findById(id);
 
         if (diffRecordFound.isPresent()) {

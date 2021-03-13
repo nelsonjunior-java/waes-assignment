@@ -27,3 +27,9 @@ services:
       - 27017:27017
     volumes:
       - ./data-diff-service/src/main/resources/database/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+
+  decoder-service:
+    image: waes-assignment/decoder-service
+    hostname: decoder-service
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registry-service:8761/eureka
