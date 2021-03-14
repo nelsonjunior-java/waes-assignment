@@ -2,6 +2,7 @@ package com.waes.assignment.controller.exception.handler;
 
 import com.waes.assignment.domain.exception.BadRequestException;
 import com.waes.assignment.domain.exception.BusinessRuleException;
+import com.waes.assignment.domain.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -15,6 +16,10 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is responsible for handling all the application Exceptions
+ * treating the errors and returning a cleaner and straightforward message.
+ */
 @Slf4j
 @ControllerAdvice("com.waes.assignment")
 public class CustomRestExceptionHandler {
@@ -64,5 +69,14 @@ public class CustomRestExceptionHandler {
         errors.add(new ErrorFieldResponse(exception.getName(), exception.getMessage()));
 
         return new ApiErrorFieldResponse(errors);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleNotFoundException(final NotFoundException exception) {
+        log.error("m=handleNotFoundException, e={} ", exception.getMessage());
+
+        return new ErrorResponse(exception.getMessage());
     }
 }

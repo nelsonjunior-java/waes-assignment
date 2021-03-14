@@ -1,10 +1,13 @@
 package com.waes.assignment.controller;
 
 import com.waes.assignment.controller.dto.request.DiffSaveRequest;
+import com.waes.assignment.controller.dto.response.DiffResponse;
 import com.waes.assignment.domain.exception.BusinessRuleException;
+import com.waes.assignment.service.DiffComparisonService;
 import com.waes.assignment.service.DiffSaveService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +26,11 @@ import javax.validation.Valid;
 public class DiffController {
 
     private final DiffSaveService diffSaveService;
+    private final DiffComparisonService diffComparisonService;
 
-    public DiffController(DiffSaveService diffSaveService) {
+    public DiffController(DiffSaveService diffSaveService, DiffComparisonService diffComparisonService) {
         this.diffSaveService = diffSaveService;
+        this.diffComparisonService = diffComparisonService;
     }
 
     @PostMapping("/{id}/left")
@@ -35,7 +40,7 @@ public class DiffController {
 
         var leftAndRightRecord = diffSaveService.saveLeftValue(id, encodedLeftValue.getBase64EncodedValue());
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build(); //##########################################
     }
 
     @PostMapping("/{id}/right")
@@ -43,8 +48,18 @@ public class DiffController {
 
         log.info("method=saveRightValue, id={}, id={}", id, encodedRightValue);
 
-        var leftAndRightRecord = diffSaveService.saveRightValue(id, encodedRightValue.getBase64EncodedValue());
+        var diffRecord = diffSaveService.saveRightValue(id, encodedRightValue.getBase64EncodedValue());
 
-        return ResponseEntity.ok().build();
+        //##########################################
+        //##########################################
+        return ResponseEntity.ok().build(); //##########################################
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DiffResponse> getValuesDifference(@PathVariable("id") Long id) throws BusinessRuleException {
+
+        var diffRecord = diffComparisonService.getDifferenceBetweenValues(id);
+
+        return ResponseEntity.ok(DiffResponse.from(diffRecord));
     }
 }

@@ -16,9 +16,8 @@ import static com.waes.assignment.domain.message.MessageCode.ERROR_NOT_BASE64_EN
 import static com.waes.assignment.domain.message.MessageCode.ERROR_NULL_ID;
 
 /**
- * Implementation of the service to save left and right values, it interfaces
- * with mongo database that saves the encoded data in the database
- * and decode service that is responsible for decoding the base64 values receivedfrom cache
+ * Implementation of the service to save left and right values, it communicates
+ * with mongo database that saves the data in decoded format on the database
  */
 @Service
 public class DiffSaveServiceImpl implements DiffSaveService {
@@ -49,7 +48,7 @@ public class DiffSaveServiceImpl implements DiffSaveService {
         final var diffRecordFound = dataDiffRepository.findById(id);
 
         if (diffRecordFound.isPresent()) {
-            diffRecordFound.get().setLeftValue(leftValue);
+            diffRecordFound.get().changeLeftValue(leftValue);
             return dataDiffRepository.save(diffRecordFound.get());
         }
         else{
@@ -74,11 +73,11 @@ public class DiffSaveServiceImpl implements DiffSaveService {
         final var diffRecordFound = dataDiffRepository.findById(id);
 
         if (diffRecordFound.isPresent()) {
-            diffRecordFound.get().setRightValue(rightValue);
+            diffRecordFound.get().changeRightValue(rightValue);
             return dataDiffRepository.save(diffRecordFound.get());
         }
         else{
-            DiffRecord diffRecord = new DiffRecord(id, rightValue, null);
+            DiffRecord diffRecord = new DiffRecord(id, null, rightValue);
             return dataDiffRepository.save(diffRecord);
         }
     }
