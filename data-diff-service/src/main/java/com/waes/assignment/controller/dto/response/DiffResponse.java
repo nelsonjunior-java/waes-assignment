@@ -1,5 +1,6 @@
 package com.waes.assignment.controller.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.waes.assignment.domain.model.DiffRecord;
 import com.waes.assignment.domain.model.Difference;
 import lombok.Data;
@@ -14,13 +15,15 @@ import java.util.List;
 public class DiffResponse {
 
     private DiffResponseStatus diffResponseStatus;
-    private List<Difference> diDifferences;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<Difference> diferences;
 
     public static DiffResponse from(DiffRecord diffRecord) {
 
         final DiffResponse diffResponse = new DiffResponse();
         diffResponse.setDiffResponseStatus(DiffResponseStatus.valueOf(diffRecord.getDiffRecordStatus().name()));
-        diffResponse.setDiDifferences(diffRecord.getDifferences());
+        diffResponse.setDiferences(diffRecord.getDifferences());
 
         return diffResponse;
     }

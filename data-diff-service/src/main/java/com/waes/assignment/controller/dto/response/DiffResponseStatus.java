@@ -6,6 +6,7 @@ package com.waes.assignment.controller.dto.response;
  * It uses Lombok to make the code cleaner removing unnecessary code
  */
 public enum DiffResponseStatus {
+    WAITING_EVALUATION,
     EQUAL,
     DIFFERENT_SIZE,
     SAME_SIZE_WITH_DIFFERENCES

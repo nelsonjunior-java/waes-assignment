@@ -1,6 +1,8 @@
 package com.waes.assignment.domain.model;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;
@@ -14,9 +16,15 @@ public class DiffRecord {
 
     @Id
     private Long id;
-    private String leftValue; //remover acesso atraves dos setters
+
+    @Setter(AccessLevel.NONE)
+    private String leftValue;
+
+    @Setter(AccessLevel.NONE)
     private String rightValue;
+
     private DiffRecordStatus diffRecordStatus;
+
     private List<Difference> differences;
 
     public DiffRecord(Long id, String leftValue, String rightValue) {

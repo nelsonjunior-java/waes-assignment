@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 /**
  * REST endpoints for saving the decoded value of an endoded64 data
@@ -34,25 +36,35 @@ public class DiffController {
     }
 
     @PostMapping("/{id}/left")
-    public ResponseEntity<String> saveLeftValue(@PathVariable("id") Long id, @Valid @RequestBody DiffSaveRequest encodedLeftValue) throws BusinessRuleException {
+    public ResponseEntity<DiffResponse> saveLeftValue(@PathVariable("id") Long id, @Valid @RequestBody DiffSaveRequest encodedLeftValue) throws BusinessRuleException {
 
-        log.info("method=saveLeftValue, id={}, id={}", id, encodedLeftValue);
+        log.info("method=saveLeftValue, id={}, encodedLeftValue={}", id, encodedLeftValue);
 
-        var leftAndRightRecord = diffSaveService.saveLeftValue(id, encodedLeftValue.getBase64EncodedValue());
+        var diffRecord = diffSaveService.saveLeftValue(id, encodedLeftValue.getBase64EncodedValue());
 
-        return ResponseEntity.ok().build(); //##########################################
+        final URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .replacePath("/v1/diff/{id}")
+                .buildAndExpand(diffRecord.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(DiffResponse.from(diffRecord));
     }
 
     @PostMapping("/{id}/right")
-    public ResponseEntity<String> saveRightValue(@PathVariable("id") Long id,@Valid @RequestBody DiffSaveRequest encodedRightValue) throws BusinessRuleException {
+    public ResponseEntity<DiffResponse> saveRightValue(@PathVariable("id") Long id,@Valid @RequestBody DiffSaveRequest encodedRightValue) throws BusinessRuleException {
 
-        log.info("method=saveRightValue, id={}, id={}", id, encodedRightValue);
+        log.info("method=saveRightValue, id={}, encodedLeftValue={}", id, encodedRightValue);
 
         var diffRecord = diffSaveService.saveRightValue(id, encodedRightValue.getBase64EncodedValue());
 
-        //##########################################
-        //##########################################
-        return ResponseEntity.ok().build(); //##########################################
+        final URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .replacePath("/v1/diff/{id}")
+                .buildAndExpand(diffRecord.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(DiffResponse.from(diffRecord));
     }
 
     @GetMapping("/{id}")
