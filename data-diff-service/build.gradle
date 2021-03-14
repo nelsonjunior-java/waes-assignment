@@ -18,16 +18,17 @@ repositories {
 }
 
 dependencies {
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
+    implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb')
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
     implementation(group: 'io.springfox', name: 'springfox-swagger2', version: swaggerVersion)
     implementation(group: 'io.springfox', name: 'springfox-swagger-ui', version: swaggerVersion)
-
-    implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb')
 
     implementation(group: 'commons-codec', name: 'commons-codec', version: commonsCodecVersion)
 

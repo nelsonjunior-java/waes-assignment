@@ -20,12 +20,12 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/v1/diff")
 @Slf4j
-public class DiffSaveController {
+public class DiffController {
 
-    private final DiffSaveService service;
+    private final DiffSaveService diffSaveService;
 
-    public DiffSaveController(DiffSaveService service) {
-        this.service = service;
+    public DiffController(DiffSaveService diffSaveService) {
+        this.diffSaveService = diffSaveService;
     }
 
     @PostMapping("/{id}/left")
@@ -33,7 +33,7 @@ public class DiffSaveController {
 
         log.info("method=saveLeftValue, id={}, id={}", id, encodedLeftValue);
 
-        var leftAndRightRecord = service.saveLeftValue(id, encodedLeftValue.getBase64EncodedValue());
+        var leftAndRightRecord = diffSaveService.saveLeftValue(id, encodedLeftValue.getBase64EncodedValue());
 
         return ResponseEntity.ok().build();
     }
@@ -43,7 +43,7 @@ public class DiffSaveController {
 
         log.info("method=saveRightValue, id={}, id={}", id, encodedRightValue);
 
-        var leftAndRightRecord = service.saveRightValue(id, encodedRightValue.getBase64EncodedValue());
+        var leftAndRightRecord = diffSaveService.saveRightValue(id, encodedRightValue.getBase64EncodedValue());
 
         return ResponseEntity.ok().build();
     }

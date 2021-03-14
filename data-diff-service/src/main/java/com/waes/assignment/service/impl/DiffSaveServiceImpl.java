@@ -3,6 +3,8 @@ package com.waes.assignment.service.impl;
 import com.waes.assignment.domain.exception.BusinessRuleException;
 import com.waes.assignment.domain.message.MessageHelper;
 import com.waes.assignment.domain.model.DiffRecord;
+import com.waes.assignment.infra.integration.service.client.decode.DecoderServiceClient;
+import com.waes.assignment.infra.integration.service.client.decode.DecoderServiceRequest;
 import com.waes.assignment.infra.repository.DataDiffRepository;
 import com.waes.assignment.service.DiffSaveService;
 import org.springframework.stereotype.Service;
@@ -23,60 +25,75 @@ public class DiffSaveServiceImpl implements DiffSaveService {
 
     private final DataDiffRepository dataDiffRepository;
     private final MessageHelper messageHelper;
+    private final DecoderServiceClient decoderServiceClient;
 
-    public DiffSaveServiceImpl(DataDiffRepository dataDiffRepository, MessageHelper messageHelper) {
+    public DiffSaveServiceImpl(DataDiffRepository dataDiffRepository, MessageHelper messageHelper, DecoderServiceClient decoderServiceClient) {
         this.dataDiffRepository = dataDiffRepository;
         this.messageHelper = messageHelper;
+        this.decoderServiceClient = decoderServiceClient;
     }
 
     /**
-     * Decodes base64 left value and create or update diff record on the database
+     * This method perform some validations on the encoded rightValue
+     * and then it saves or updates it in case an record for this id already exists
      * @param id diff record that will be used as the id in the database
-     * @param encodedLeftValue base64 encoded left value
+     * @param leftValue base64 encoded left value
      * @return the response return DiffRecord which is the database saved value
      */
     @Override
-    public DiffRecord saveLeftValue(Long id, String encodedLeftValue) throws BusinessRuleException {
+    public DiffRecord saveLeftValue(Long id, String leftValue) throws BusinessRuleException {
 
-        performValidations(id, encodedLeftValue);
-
-        //Decode before save
+        performValidations(id, leftValue);
+        leftValue = decodeBase64Value(leftValue);
 
         final var diffRecordFound = dataDiffRepository.findById(id);
 
         if (diffRecordFound.isPresent()) {
-            diffRecordFound.get().setLeftValue(encodedLeftValue);
+            diffRecordFound.get().setLeftValue(leftValue);
             return dataDiffRepository.save(diffRecordFound.get());
         }
         else{
-            DiffRecord diffRecord = new DiffRecord(id, encodedLeftValue, null);
+            DiffRecord diffRecord = new DiffRecord(id, leftValue, null);
             return dataDiffRepository.save(diffRecord);
         }
     }
 
     /**
-     * Decodes base64 left value and create or update diff record on the database
+     * This method perform some validations on the encoded rightValue
+     * and then it saves or updates it in case an record for this id already exists
      * @param id diff record that will be used as the id in the database
-     * @param encodedRightValue base64 encoded right value
+     * @param rightValue base64 encoded right value
      * @return the response return DiffRecord which is the database saved value
      */
     @Override
-    public DiffRecord saveRightValue(Long id, String encodedRightValue) throws BusinessRuleException {
+    public DiffRecord saveRightValue(Long id, String rightValue) throws BusinessRuleException {
 
-        performValidations(id, encodedRightValue);
-
-        //Decode before save
+        performValidations(id, rightValue);
+        rightValue = decodeBase64Value(rightValue);
 
         final var diffRecordFound = dataDiffRepository.findById(id);
 
         if (diffRecordFound.isPresent()) {
-            diffRecordFound.get().setRightValue(encodedRightValue);
+            diffRecordFound.get().setRightValue(rightValue);
             return dataDiffRepository.save(diffRecordFound.get());
         }
         else{
-            DiffRecord diffRecord = new DiffRecord(id, encodedRightValue, null);
+            DiffRecord diffRecord = new DiffRecord(id, rightValue, null);
             return dataDiffRepository.save(diffRecord);
         }
+    }
+
+    /**
+     * This method invokes the external service decoder-service
+     * in order to decode the encoded Base64 value it received and returns a decoded String
+     * @param encodedValue base64 encoded to be decoded
+     * @return the response return an String with a decoded base64 value
+     */
+    private String decodeBase64Value(String encodedValue){
+
+        //Decodes value before saving because base64 adds an average of 33% in size
+        DecoderServiceRequest decoderServiceRequest = new DecoderServiceRequest(encodedValue);
+        return decoderServiceClient.decode(decoderServiceRequest).getDecodeValue();
     }
 
     /**
