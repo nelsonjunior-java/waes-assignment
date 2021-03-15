@@ -1,9 +1,10 @@
 # waes-assignment
 
-
-
 ## Getting Started
 ```shell
-./gradlew clean build -x test
+./buildAllProjects.sh
+
 ./buildDockerImage.sh
+
 docker-compose up -d
+```

@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 /**
- * REST endpoints for saving the decoded value of an endoded64 data
+ * REST endpoints for saving the decoded value of an encoded base64 data
  * in a left and right endpoint, each representing a different value to be compared in another endpoint
  */
 @RestController

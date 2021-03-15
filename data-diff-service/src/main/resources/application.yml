@@ -9,7 +9,6 @@ spring:
 
 server:
   port: 0
-  #port: 8384
 eureka:
   instance:
     hostname: localhost
@@ -19,3 +18,9 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:8761/eureka
     fetch-registry: true
     register-with-eureka: true
+
+
+
+#logging:
+#  level:
+#    ROOT: DEBUG
