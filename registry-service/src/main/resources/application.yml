@@ -6,7 +6,11 @@ server:
   port: 8761
 eureka:
   instance:
-    hostname: data-diff-service
+    # Necessary for Docker as it doesn't have DNS entries
+    prefer-ip-address: true
+    # Necessary for Docker otherwise you will get 172.0.0.x IP
+    #ip-address: "${HOST}"
+    hostname: eureka
     instanceId: ${spring.application.name}:${eureka.instance.hostname}:${random.value}
   client: # don't register with yourself because it is not a client
     registerWithEureka: false

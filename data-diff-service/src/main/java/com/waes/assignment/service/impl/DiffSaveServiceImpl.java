@@ -111,7 +111,7 @@ public class DiffSaveServiceImpl implements DiffSaveService {
             throw new BusinessRuleException(messageHelper.get(ERROR_NULL_ID));
         }
 
-        if (StringUtils.isEmpty(encodedValue)) {
+        if (StringUtils.isEmpty(encodedValue) || encodedValue.isBlank()) {
             throw new BusinessRuleException(messageHelper.get(ERROR_EMPTY_ENCODED_VALUE));
         }
 

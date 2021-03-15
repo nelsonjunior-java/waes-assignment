@@ -11,6 +11,7 @@ server:
   port: 0
 eureka:
   instance:
+    appname: data-diff-service
     hostname: localhost
     instanceId: ${spring.application.name}:${eureka.instance.hostname}:${random.value}
   client:

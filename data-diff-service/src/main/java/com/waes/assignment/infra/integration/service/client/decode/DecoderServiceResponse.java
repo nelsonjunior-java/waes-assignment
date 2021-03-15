@@ -1,5 +1,6 @@
 package com.waes.assignment.infra.integration.service.client.decode;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -7,6 +8,7 @@ import lombok.Data;
  * It uses Lombok to make the code cleaner removing unnecessary code
  */
 @Data
+@AllArgsConstructor
 public class DecoderServiceResponse {
 
     private String decodeValue;

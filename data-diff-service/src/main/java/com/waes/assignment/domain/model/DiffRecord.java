@@ -1,6 +1,7 @@
 package com.waes.assignment.domain.model;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -12,6 +13,7 @@ import java.util.List;
  * It uses Lombok to make the code cleaner removing unnecessary code
  */
 @Data
+@AllArgsConstructor
 public class DiffRecord {
 
     @Id

@@ -12,6 +12,7 @@ server:
 # Service registry integration properties
 eureka:
   instance:
+    appname: gateway
     hostname: localhost
     instanceId: ${spring.application.name}:${eureka.instance.hostname}:${random.value}
   client:
@@ -24,4 +25,4 @@ eureka:
 logging:
   level:
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
-    ROOT: DEBUG
+    #ROOT: DEBUG
