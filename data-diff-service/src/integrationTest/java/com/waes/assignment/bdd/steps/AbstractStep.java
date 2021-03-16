@@ -9,6 +9,8 @@ import org.springframework.util.CollectionUtils;
 import io.restassured.response.Response;
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.containsString;
+
 /**
  * Abstract class inherited by all step definitions in order to use
  * the default behavior for using the tests API
@@ -76,7 +78,6 @@ public abstract class AbstractStep {
     }
 
     /**
-     * Cria o endpoint a partir de um URL base + o path passado da API
      * Creates the endpoint URL from a base URL + request path
      * @param path - Endpoint path
      * @return Endpoint with base URL and API path
@@ -111,6 +112,15 @@ public abstract class AbstractStep {
      */
     protected void validateResponseCode(int... status) {
         Assertions.assertThat(status).contains(CONTEXT.getResponse().getStatusCode());
+    }
+
+    /**
+     * Valida se o corpo da resposta contem um texto
+     * Validates if the message body has a given text
+     * @param text - Text to be analyzed
+     */
+    protected void validatesResponseBodyContains(String text) {
+        CONTEXT.getResponse().then().body(containsString(text));
     }
 
 }
