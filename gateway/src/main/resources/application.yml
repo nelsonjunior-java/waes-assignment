@@ -13,11 +13,11 @@ server:
 eureka:
   instance:
     appname: gateway
-    hostname: localhost
-    instanceId: ${spring.application.name}:${eureka.instance.hostname}:${random.value}
+    #hostname: localhost
+    instanceId: ${spring.application.name}:${eureka.instance.appname}:${random.value}
   client:
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:8761/eureka
+      defaultZone: http://localhost:8761/eureka
     fetch-registry: true
     register-with-eureka: true
 

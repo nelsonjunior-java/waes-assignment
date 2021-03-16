@@ -37,7 +37,7 @@ public class ValueDifferenceComparatorImpl implements ValueDifferenceComparator<
 
             if (areCharactersDifferent(leftValue, rightValue, index)) {
 
-                if (isOffSetDifferentFromInitialValue(offSet)) {
+                if (isOffSetDifferentFromInitialValue(length)) {
                     length++;
                 } else {
                     offSet = index;
@@ -45,7 +45,7 @@ public class ValueDifferenceComparatorImpl implements ValueDifferenceComparator<
                 }
 
             } else {
-                if (isOffSetDifferentFromInitialValue(offSet)) {
+                if (isOffSetDifferentFromInitialValue(length)) {
                     differences.add(new Difference(offSet, length));
                     offSet = OFFSET_INITIAL_VALUE;
                     length = LENGTH_INITIAL_VALUE;
@@ -53,7 +53,7 @@ public class ValueDifferenceComparatorImpl implements ValueDifferenceComparator<
             }
         }
 
-        if (isOffSetDifferentFromInitialValue(offSet)) {
+        if (isOffSetDifferentFromInitialValue(length)) {
             differences.add(new Difference(offSet, length));
         }
 
@@ -73,12 +73,12 @@ public class ValueDifferenceComparatorImpl implements ValueDifferenceComparator<
 
     /**
      * Checks if the provided offset value is different from the OFFSET_INITIAL_VALUE value
-     * @param offset string value
+     * @param length string value
      * @return It will return true when the offset value provided is different from
      * what is defined in the OFFSET_INITIAL_VALUE
      */
-    public boolean isOffSetDifferentFromInitialValue(Integer offset) {
-        return offset != OFFSET_INITIAL_VALUE;
+    public boolean isOffSetDifferentFromInitialValue(Integer length) {
+        return length != OFFSET_INITIAL_VALUE;
     }
 
 }

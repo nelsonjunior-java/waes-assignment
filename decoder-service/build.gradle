@@ -6,6 +6,7 @@ plugins {
 ext {
     set('springCloudVersion', 'Hoxton.SR9')
     set('swaggerVersion', '2.9.1')
+    set('lombokVersion', '1.18.12')
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -25,6 +26,15 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    //Tests
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+    compileOnly(group: 'org.projectlombok', name: 'lombok',version: lombokVersion)
+    testCompileOnly(group: 'org.projectlombok', name: 'lombok',version: lombokVersion)
+    annotationProcessor(group: 'org.projectlombok', name: 'lombok',version: lombokVersion)
 
 }
 
