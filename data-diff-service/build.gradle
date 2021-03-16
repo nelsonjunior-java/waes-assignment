@@ -9,16 +9,31 @@ ext {
     set('commonsCodecVersion', '1.15')
     set('resilience4jVersion', '1.7.0')
     set('lombokVersion', '1.18.12')
+    set('cucumberVersion', '5.0.0')
+    set('restAssuredVersion', '3.0.5')
+    set('flapdoodleMongoVersion', '2.2.0')
+    set('testContainersVersion', '1.15.0-rc2')
 }
 
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'application'
+apply from: "./gradle/tests.gradle"
 
 sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
+}
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 dependencies {
@@ -37,17 +52,45 @@ dependencies {
     implementation(group: 'commons-codec', name: 'commons-codec', version: commonsCodecVersion)
 
     //Tests
+    implementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
-    compileOnly(group: 'org.projectlombok', name: 'lombok',version: lombokVersion)
-    testCompileOnly(group: 'org.projectlombok', name: 'lombok',version: lombokVersion)
-    annotationProcessor(group: 'org.projectlombok', name: 'lombok',version: lombokVersion)
+    compileOnly 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    implementation "org.testcontainers:testcontainers:${testContainersVersion}"
+
+    //Integration Tests
+    integrationTestAnnotationProcessor 'org.projectlombok:lombok'
+    integrationTestImplementation 'org.junit.vintage:junit-vintage-engine'
+    integrationTestImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+    integrationTestImplementation "io.cucumber:cucumber-junit:${cucumberVersion}"
+    integrationTestImplementation "io.cucumber:cucumber-spring:${cucumberVersion}"
+    integrationTestImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+    integrationTestImplementation "io.rest-assured:json-path:${restAssuredVersion}"
+    integrationTestImplementation "io.rest-assured:xml-path:${restAssuredVersion}"
+    integrationTestImplementation "org.testcontainers:mongodb:${testContainersVersion}"
+
+    integrationTestImplementation(group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb')
+
+    integrationTestImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //HTTP Mock
+    integrationTestImplementation "org.springframework.cloud:spring-cloud-starter-contract-stub-runner"
 }
 
 test {
     useJUnitPlatform()
+
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED"
+    }
 }
 
 dependencyManagement {

@@ -2,6 +2,7 @@ package com.waes.assignment.infra.integration.service.client.decode;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * This class is an abstraction from the decoder-service response
@@ -9,6 +10,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class DecoderServiceResponse {
 
     private String decodeValue;

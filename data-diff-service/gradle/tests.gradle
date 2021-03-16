@@ -1,0 +1,54 @@
+/*
+Configuração de teste de integração utilizada em mais de um projeto, sendo assim,
+quando for feito alguma alteração, ver se os projetos não serão impactados.
+ */
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integrationTest/java')
+        }
+        resources.srcDir file('src/integrationTest/resources')
+    }
+}
+
+apply plugin: 'idea'
+idea {
+    module {
+        testSourceDirs += project.sourceSets.integrationTest.java.srcDirs
+        testResourceDirs += project.sourceSets.integrationTest.resources.srcDirs
+    }
+}
+
+configurations {
+    integrationTestImplementation.extendsFrom testImplementation
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestCompileOnly.extendsFrom testCompileOnly
+    integrationTestRuntime.extendsFrom testRuntime
+    integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
+}
+
+task integrationTest(type: Test) {
+    description = 'Runs integration tests.'
+    group = 'verification'
+
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    reports.junitXml.enabled = false
+    reports.html.enabled = false
+    outputs.upToDateWhen { false }
+
+    //if (System.getProperty("useLocalDatabase") != null) systemProperty "useLocalDatabase", System.getProperty("useLocalDatabase")
+
+}
+
+//integrationTest {
+//    useJUnitPlatform()
+//
+//    testLogging {
+//        events "PASSED", "FAILED", "SKIPPED"
+//        showStandardStreams true
+//    }
+//}

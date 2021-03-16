@@ -1,0 +1,117 @@
+package com.waes.assignment.bdd.steps;
+
+import com.waes.assignment.bdd.CucumberContextTest;
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
+import org.assertj.core.api.Assertions;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.util.CollectionUtils;
+import io.restassured.response.Response;
+import java.util.Map;
+
+/**
+ * Abstract class inherited by all step definitions in order to use
+ * the default behavior for using the tests API
+ */
+public abstract class AbstractStep {
+
+    @LocalServerPort
+    private int port;
+
+    private CucumberContextTest CONTEXT = CucumberContextTest.INSTANCE;
+
+    /**
+     * Adds a new path param to the request
+     * @param json - payload JSON
+     */
+    protected void addToPayload(String json) {
+        CONTEXT.setPayload(json);
+    }
+
+    /**
+     * Creates a POST request with the context information
+     * @param path - API Path that will be used in the request
+     */
+    protected void executePost(String path) {
+        final var request = createDefaultRequest(CONTEXT.getHeaders(), CONTEXT.getPathParams(), CONTEXT.getQueryParams(), CONTEXT.getPayload());
+        final var url = createEndpointUrl(path);
+
+        final var response = request.log()
+                .all()
+                .post(url);
+
+        logResponse(response);
+        CONTEXT.setResponse(response);
+    }
+
+    /**
+     * Creates a default Request for using on any RestAssured Request
+     * @param headers  - Request Headers
+     * @param pathParams  - Endpoint Path params
+     * @param queryParams - Endpoint Query params
+     * @param payload     - Request JSON payload
+     * @return New request with the default information and the request parameters
+     */
+    private RequestSpecification createDefaultRequest(Map<String, String> headers, Map<String, String> pathParams, Map<String, String> queryParams, Object payload) {
+        final var request = CONTEXT.getRequest();
+
+        if (!CollectionUtils.isEmpty(headers)) {
+            request.headers(headers);
+        }
+
+        if (!CollectionUtils.isEmpty(pathParams)) {
+            request.pathParams(pathParams);
+        }
+
+        if (!CollectionUtils.isEmpty(queryParams)) {
+            request.queryParams(queryParams);
+        }
+
+        if (payload != null) {
+            request.contentType(ContentType.JSON)
+                    .body(payload);
+        }
+
+        return request;
+    }
+
+    /**
+     * Cria o endpoint a partir de um URL base + o path passado da API
+     * Creates the endpoint URL from a base URL + request path
+     * @param path - Endpoint path
+     * @return Endpoint with base URL and API path
+     */
+    private String createEndpointUrl(String path) {
+        return baseUrl() + path;
+    }
+
+    /**
+     * Creates the base URL for using the API
+     */
+    protected String baseUrl() {
+        return "http://localhost:" + port;
+    }
+
+    /**
+     * Loga as informações que foram retornadas na resposta da API
+     * Logs the information returned on the API response
+     * @param response - Objeto de resposta do RestAssured
+     * @param response - RestAssured response Object
+     */
+    private void logResponse(Response response) {
+        response.then()
+                .log()
+                .all();
+    }
+
+    /**
+     * Validates the returned status code
+     *
+     * @param status - Status code
+     */
+    protected void validateResponseCode(int... status) {
+        Assertions.assertThat(status).contains(CONTEXT.getResponse().getStatusCode());
+    }
+
+}
+
