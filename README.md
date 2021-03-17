@@ -81,6 +81,118 @@ The application Swagger documentation can be accessed at:
 http://localhost:8083/swagger-ui.html
 ```
 
+### Application usage examples
+
+#### Example #1 - When values are EQUAL 
+
+##### Saving a Left value
+```
+curl -X POST "http://localhost:8083/v1/diff/1/left" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"base64EncodedValue\": \"bXkgZXF1YWwgdGVzdGluZyBlbmNvZGVkIHZhbHVlIQ==\"}"
+```
+Response body:
+```
+{
+  "diffResponseStatus": "WAITING_EVALUATION"
+}
+```
+
+##### Saving a right value
+```
+curl -X POST "http://localhost:8083/v1/diff/1/right" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"base64EncodedValue\": \"bXkgZXF1YWwgdGVzdGluZyBlbmNvZGVkIHZhbHVlIQ==\"}"
+```
+Response body:
+```
+{
+  "diffResponseStatus": "WAITING_EVALUATION"
+}
+```
+
+##### Comparing the previously saved values
+```
+curl -X GET "http://localhost:8083/v1/diff/1" -H "accept: */*"
+```
+Response body:
+```
+{
+  "diffResponseStatus": "EQUAL"
+}
+```
+
+#### Example #2 - When values have DIFFERENT SIZE
+
+##### Saving a Left value
+```
+curl -X POST "http://localhost:8083/v1/diff/2/left" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"base64EncodedValue\": \"bXkgc21hbCB0ZXN0aW5nIGVuY29kZWQgdmFsdWU=\"}"
+```
+Response body:
+```
+{
+  "diffResponseStatus": "WAITING_EVALUATION"
+}
+```
+
+##### Saving a right value
+```
+curl -X POST "http://localhost:8083/v1/diff/2/right" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"base64EncodedValue\": \"bXkgc21hbCB0ZXN0aW5nIGVuY29kZWQgdmFsdWUgYmlnZ2VyIGluIHNpemUhISE=\"}"
+```
+Response body:
+```
+{
+  "diffResponseStatus": "WAITING_EVALUATION"
+}
+```
+
+##### Comparing the previously saved values
+```
+curl -X GET "http://localhost:8083/v1/diff/2" -H "accept: */*"
+```
+Response body:
+```
+{
+  "diffResponseStatus": "DIFFERENT_SIZE"
+}
+```
+
+#### Example #3 - When values have SAME SIZE WITH DIFFERENCES
+
+##### Saving a Left value
+```
+curl -X POST "http://localhost:8083/v1/diff/3/left" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"base64EncodedValue\": \"eyAibmFtZSI6IkFsYmVydCJ9Cg==\"}"
+```
+Response body:
+```
+{
+  "diffResponseStatus": "WAITING_EVALUATION"
+}
+```
+
+##### Saving a right value
+```
+curl -X POST "http://localhost:8083/v1/diff/3/right" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"base64EncodedValue\": \"eyJuYW1lIjoiU2NvdHR5In0=\"}"
+```
+Response body:
+```
+{
+  "diffResponseStatus": "WAITING_EVALUATION"
+}
+```
+
+##### Comparing the previously saved values
+```
+curl -X GET "http://localhost:8083/v1/diff/3" -H "accept: */*"
+```
+Response body:
+```
+{
+  "diffResponseStatus": "SAME_SIZE_WITH_DIFFERENCES",
+  "diferences": [
+    {
+      "offset": 9,
+      "length": 6
+    }
+  ]
+}
+```
 
 
 
@@ -88,26 +200,12 @@ http://localhost:8083/swagger-ui.html
 
 
 
+##Suggestions for improvements
 
+* Implement some microservices resilience patterns such as Circuit Breaker and Retry
 
+* Create an API Gateway as a common entrypoint routing requests to the services
 
+* Implement some authentication and authorization method such OAuth or JWT
 
-
-
-
-
-
-
-
-
-
-
-
-
-[comment]: <> (##Suggestions for improvements)
-
-[comment]: <> (* Implement some microservices resilience patterns such as Circuit Breaker and Retry)
-
-[comment]: <> (* Create an API Gateway as a common entrypoint routing requests to the services)
-
-[comment]: <> (* Implement some authentication and authorization method such OAuth or JWT)
+* Implement a caching system with Redis to avoid unecessary hits on the mongo DB database and improve performance
