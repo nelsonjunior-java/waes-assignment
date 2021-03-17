@@ -103,7 +103,16 @@ git clone https://github.com/nelsonjunior-developer/waes-assignment
 You can run the application using docker, after building the projects and running the script ```./buildDockerImage.sh ```
 For starting the application after following the previous steps, you can use this docker-compose command:
 ```shell
- docker-compose up -d
+docker-compose up -d
+```
+
+For stopping all containers:
+```shell
+docker-compose stop
+```
+For stopping and removing containers and networks:
+```shell
+docker-compose down
 ```
 ## On Gradle
 Before running the application locally with gradle, it's necessary to start the MongoDB that is configured in the ```docker-compose.yml``` file as follows:
