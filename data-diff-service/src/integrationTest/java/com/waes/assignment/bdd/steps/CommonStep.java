@@ -5,9 +5,19 @@ import io.cucumber.java.pt.Entao;
 
 public class CommonStep extends AbstractStep{
 
-    @Then("the operation is well succeed returning a http code 200")
+    @Then("the operation is well succeed returning the http code 200")
     public void operaionSucceed() {
         validateResponseCode(200,201);
+    }
+
+    @Then("the operation fails returning the http code 400")
+    public void theOperationFailsReturningTheHttpCodeFourHundred() {
+        validateResponseCode(400);
+    }
+
+    @Then("the operation fails returning the NOT FOUND http code 404")
+    public void theOperationFailsReturningTheHttpCodeNotFound() {
+        validateResponseCode(404);
     }
 
     @Entao("^the response contains the text (.*)$")

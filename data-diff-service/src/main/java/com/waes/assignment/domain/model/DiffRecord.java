@@ -41,8 +41,8 @@ public class DiffRecord {
     /**
      * This method was created to make some validations before changing the rightValue
      * It checks if the value is being set for the first time, if it is not then it will check if this value
-     * is different from the previous value, if so the status will return to WAITING_EVALUATION
-     * in order to call the method responsible for the evaluations again on the next endpoint evaluation request
+     * is different from the previous value, if so the status will return to WAITING_EVALUATION in order to
+     * call the method responsible for the evaluations again a future evaluation endpoint request
      * @param rightValue string value
      */
     public void changeRightValue(String rightValue){

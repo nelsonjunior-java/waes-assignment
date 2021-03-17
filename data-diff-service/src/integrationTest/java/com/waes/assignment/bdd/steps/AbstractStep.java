@@ -123,5 +123,21 @@ public abstract class AbstractStep {
         CONTEXT.getResponse().then().body(containsString(text));
     }
 
+    /**
+     * Triggers a GET request with the context information
+     * @param path - Path da API que deve ser realizado a requisição  API path that the request must be made
+     */
+    protected void executeGet(String path) {
+        final var request = createDefaultRequest(CONTEXT.getHeaders(), CONTEXT.getPathParams(), CONTEXT.getQueryParams(), CONTEXT.getPayload());
+        final var url = createEndpointUrl(path);
+
+        final var response = request.log()
+                .all()
+                .get(url);
+
+        logResponse(response);
+        CONTEXT.setResponse(response);
+    }
+
 }
 

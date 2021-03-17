@@ -52,7 +52,7 @@ public class DiffComparisonServiceImpl implements DiffComparisonService {
 
         validateDiffRecord(diffRecordFound);
 
-        //if the status is NOT equals to WAITING_EVALUATION, then it not necessary to evaluate it again
+        //if the status is NOT equals to WAITING_EVALUATION, then it's not necessary to evaluate it again
         if(diffRecordFound.getDiffRecordStatus().equals(DiffRecordStatus.WAITING_EVALUATION)){
             evaluateDifferences(diffRecordFound);
         }
