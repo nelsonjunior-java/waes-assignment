@@ -12,6 +12,7 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registry-service:8761/eureka
       SPRING_DATA_MONGODB_URI: mongodb://data_diff_user:waes_assignment@mongo-database:27017/data_diff?retryWrites=true&w=majority
+      REMOTE_DECODER-SERVICE_BASE-URL: http://decoder-service:8082
     ports:
       - "8083:8083"
 
@@ -33,3 +34,5 @@ services:
     hostname: decoder-service
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registry-service:8761/eureka
+    ports:
+      - "8082:8082"
