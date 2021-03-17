@@ -200,7 +200,7 @@ Response body:
 
 
 
-##Suggestions for improvements
+###Suggestions for improvements
 
 * Implement some microservices resilience patterns such as Circuit Breaker and Retry
 
