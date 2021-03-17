@@ -2,6 +2,9 @@ package com.waes.assignment.controller.dto.response;
 
 import lombok.Data;
 
+/**
+ * Class used on all base64 decode endpoint responses
+ */
 @Data
 public class Base64DecoderResponse {
 

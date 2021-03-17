@@ -20,6 +20,9 @@ import static com.waes.assignment.utils.DecoderConstants.EMPTY_SPACE__ENCODED_BA
 import static com.waes.assignment.utils.DecoderConstants.NOT_ENCODED_BASE64_VALUE;
 import static com.waes.assignment.utils.DecoderConstants.ENCODED_BASE64_VALUE;
 
+/**
+ * Class used for unit testing the Base64DecoderServiceImpl class
+ */
 @ExtendWith(MockitoExtension.class)
 public class Base64DecoderServiceImplTest {
 

@@ -2,7 +2,6 @@ package com.waes.assignment.unit.domain.decoder;
 
 import com.waes.assignment.domain.decoder.impl.Base64DecoderImpl;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,6 +13,9 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Class used for unit testing the Base64DecoderImpl class
+ */
 @ExtendWith(MockitoExtension.class)
 public class Base64DecoderImplTest {
 

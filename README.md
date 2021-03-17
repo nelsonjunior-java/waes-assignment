@@ -2,29 +2,63 @@
 
 Project
 ===================
-This project main goal is to create a tool to analyze the differences between two base64 encoded value payloads.
+This project's main goal is to create a tool to analyze the differences between two base64 encoded value payloads.
 
-#Architecture
+# Architecture
 The application was built using the microservices architecture approach in order to make it scalable by nature.
-I chose a more complex architecture to solve the problema dividing it in microservices in order to demonstrate my knowledge of these subjects.
+I chose a more complex architecture to solve the problem dividing it in microservices in order to demonstrate my knowledge of these subjects.
 Each service has its own responsibility.
 
 | Service       | Description |
 | ------------- | ------------- |
-| data-diff-service   |  Compare values and return  differences when they exist |
-| decoder-service | This service is responsible for getting an base64 encoded value and decoding it  |
+| data-diff-service   |  Compare values and return differences when they exist |
+| decoder-service | This service is responsible for getting a base64 encoded value and decoding it  |
 | registry-service  | This service follows the registry and service discovery pattern |
+
+The services don't have a state and can be easily scaled using docker-compose.
+
+## Database
 
 | Database       | Description |
 | ------------- | ------------- |
 | MongoDB   |  This is the database used by the data-diff-service |
 
-All components of this application were chosen with scalability in mind, MongoDb for example was chosen as the data-diff-service database due 
+All components of this application were chosen with scalability in mind, MongoDB for example was chosen as the data-diff-service database due 
 to its performance benefits and also the horizontal scaling capability.
 
-The services don have a state and can be easily scaled using docker-compose.
+MongoDB credentials:
 
-## Technologies
+user: ```data_diff_user``` 
+
+password: ```waes_assignment```
+
+database: ```data_diff```
+
+### Recomended MongoDB GUI:
+[Robo3T](https://robomongo.org/)
+
+## Technologies used in the project
+
+* Language
+   * Java 11
+
+* Unit Tests
+    * Junit
+
+* Integration Tests
+    * cucumber
+    * rest-assured
+    * testcontainers
+
+* Build automation
+    * Gradle 6.7
+
+* Framework
+   * SpringBoot
+   * SpringCloud
+* Libs
+    * Lombok    
+    * Swagger    
 
 ## Getting Started
 
@@ -193,8 +227,6 @@ Response body:
   ]
 }
 ```
-
-
 
 ### Suggestions for improvements
 

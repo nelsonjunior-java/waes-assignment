@@ -5,6 +5,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 
+/**
+ * Implements the decoder contract in order to decode a base64 value
+ * and return a decode one
+ */
 @Service
 public class Base64DecoderImpl implements Decoder<String, String> {
 

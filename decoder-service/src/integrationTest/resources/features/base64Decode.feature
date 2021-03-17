@@ -12,7 +12,7 @@ Feature: Decode a base64 value
     Given I try to decode a value passing in the decodeValue body parameter an empty value
     Then the operation fails returning the http code 400
 
-  Scenario: Decoding a value with  only whitespaces
+  Scenario: Decoding a value with only whitespaces
     Given I try to decode a value passing in the decodeValue body parameter with only white spaces
     Then the operation fails returning the http code 400
 

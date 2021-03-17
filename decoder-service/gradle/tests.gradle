@@ -1,8 +1,6 @@
 /*
-Configuração de teste de integração utilizada em mais de um projeto, sendo assim,
-quando for feito alguma alteração, ver se os projetos não serão impactados.
+Integration Tests configuration
  */
-
 sourceSets {
     integrationTest {
         java {
@@ -39,9 +37,6 @@ task integrationTest(type: Test) {
     reports.junitXml.enabled = false
     reports.html.enabled = false
     outputs.upToDateWhen { false }
-
-    //if (System.getProperty("useLocalDatabase") != null) systemProperty "useLocalDatabase", System.getProperty("useLocalDatabase")
-
 }
 
 integrationTest {

@@ -25,6 +25,12 @@ public class Base64DecoderServiceImpl implements Base64DecoderService {
         this.messageHelper = messageHelper;
     }
 
+    /**
+     * Decodes a base64 value
+     *
+     * @param encodedValue encoded value to be decoded
+     * @return decoded value
+     */
     @Override
     public String decode(String encodedValue) {
 
@@ -33,13 +39,18 @@ public class Base64DecoderServiceImpl implements Base64DecoderService {
         return decoder.decode(encodedValue);
     }
 
-    private void performValidations(String encodedValue){
+    /**
+     * Perform some internal validations
+     *
+     * @param encodedValue encoded value to be validated
+     */
+    private void performValidations(String encodedValue) {
 
-        if(StringUtils.isEmpty(encodedValue) || encodedValue.isBlank()){
+        if (StringUtils.isEmpty(encodedValue) || encodedValue.isBlank()) {
             throw new BadRequestException(messageHelper.get(ERROR_EMPTY_ENCODED_VALUE));
         }
 
-        if (!Base64.isBase64(encodedValue.getBytes())){
+        if (!Base64.isBase64(encodedValue.getBytes())) {
             throw new BadRequestException(messageHelper.get(ERROR_NOT_BASE64_ENCODED_VALUE));
         }
     }

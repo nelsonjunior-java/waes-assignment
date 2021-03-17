@@ -3,10 +3,14 @@ package com.waes.assignment.controller.dto.request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 import lombok.Data;
 
 import static com.waes.assignment.domain.message.MessageCode.ERROR_ENCODED_BASE64_MAX_SIZE;
 
+/**
+ * Class used on all base64 decode endpoint requests
+ */
 @Data
 public class Base64DecoderRequest {
 

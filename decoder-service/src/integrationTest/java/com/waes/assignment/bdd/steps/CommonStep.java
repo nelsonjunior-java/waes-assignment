@@ -3,6 +3,9 @@ package com.waes.assignment.bdd.steps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.pt.Entao;
 
+/**
+ * Class with common steps that can be used throughout the integrations tests
+ */
 public class CommonStep extends AbstractStep {
 
     @Then("the operation is well succeed returning the http code 200")

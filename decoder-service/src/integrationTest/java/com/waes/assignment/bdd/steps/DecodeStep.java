@@ -9,11 +9,6 @@ import static com.waes.assignment.utils.DecoderConstants.EMPTY_SPACES_VALUE_TO_D
 import static com.waes.assignment.utils.DecoderConstants.NOT_BASE64_VALUE_TO_DECODE;
 import static com.waes.assignment.utils.DecoderConstants.EMPTY_VALUE_TO_DECODE;
 
-
-
-
-
-
 public class DecodeStep extends AbstractStep {
 
     @Given("I try to decode a value passing in the decodeValue body parameter an empty value")

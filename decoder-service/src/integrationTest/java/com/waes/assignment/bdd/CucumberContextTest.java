@@ -9,7 +9,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 /**
- * Contexto para ser utilizado dentro de um cenário do Cucumber
+ * Contexto to be used inside a cucumber scenario
  */
 public enum CucumberContextTest {
     INSTANCE;
