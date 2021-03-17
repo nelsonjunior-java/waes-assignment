@@ -63,7 +63,7 @@ database: ```data_diff```
 ## Getting Started
 
 ### Pre-requisite
-Before running the project on your local machine, please make sure that following items are installed;
+Before running the project on your local machine, please make sure that the following items are installed;
 - docker
 - docker-compose
 
@@ -72,40 +72,40 @@ Before running the project on your local machine, please make sure that followin
 Clone the source code.
 
 ```sh
-$ git clone https://github.com/nelsonjunior-developer/waes-assignment
+ git clone https://github.com/nelsonjunior-developer/waes-assignment
 ```
 
 #### Running Tests
 
 ```sh
-$ ./buildAllProjects.sh
+ ./buildAllProjects.sh
 ```
 
 #### Running Integration Tests  
 ```sh
-$ ./runIntegrationTests.sh
+ ./runIntegrationTests.sh
 ```
 
 #### Building the docker images
 ```shell
-$ ./buildDockerImage.sh
+ ./buildDockerImage.sh
 ```
 
 # How to run
 ## On docker
-You can run the application using docker, after running the script ```./buildDockerImage.sh ```
-For starting the application after following the previous steps, you can use the following docker-compose command:
+You can run the application using docker, after building the projects and running the script ```./buildDockerImage.sh ```
+For starting the application after following the previous steps, you can use this docker-compose command:
 ```shell
-$ docker-compose up -d
+ docker-compose up -d
 ```
 ## On Gradle
-Each project can be executed individually through gradle wrapper:
+Each project can be executed individually through the gradle wrapper:
 ```shell
-$ ./registry-service/gradlew -p registry-service bootRun
+ ./registry-service/gradlew -p registry-service bootRun
 ```
 
 ## Accessing the application
-The application (data-diff-service) runs on port 8083 and can be acesses at:
+The application (data-diff-service) that is the entry point to communicating to the other services runs on port 8083 and can be acesses at:
 ```
 http://localhost:8083
 ```
@@ -227,6 +227,8 @@ Response body:
   ]
 }
 ```
+
+
 
 ### Suggestions for improvements
 
