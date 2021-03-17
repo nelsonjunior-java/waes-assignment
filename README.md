@@ -5,6 +5,11 @@ Project
 This project's main goal is to create a tool to analyze the differences between two base64 encoded value payloads.
 
 # Architecture
+
+
+[![N|Solid](https://i.imgur.com/lHJVOav.png)](https://www.wearewaes.com)
+
+
 The application was built using the microservices architecture approach in order to make it scalable by nature.
 I chose a more complex architecture to solve the problem dividing it in microservices in order to demonstrate my knowledge of these subjects.
 Each service has its own responsibility.
