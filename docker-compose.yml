@@ -6,20 +6,14 @@ services:
     ports:
       - "8761:8761"
 
-  gateway:
-    image: waes-assignment/gateway
-    hostname: gateway
-    ports:
-      - "8080:8080"
-    environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registry-service:8761/eureka
-
   data-diff-service:
     image: waes-assignment/data-diff-service
     hostname: data-diff-service
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registry-service:8761/eureka
       SPRING_DATA_MONGODB_URI: mongodb://data_diff_user:waes_assignment@mongo-database:27017/data_diff?retryWrites=true&w=majority
+    ports:
+      - "8083:8083"
 
   mongo-database:
     container_name: mongo-db
