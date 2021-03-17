@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Contexto para ser utilizado dentro de um cenário do Cucumber
+ * Context to be used inside a cucumber scenario
  */
 public enum CucumberContextTest {
     INSTANCE;

@@ -196,16 +196,12 @@ Response body:
 
 
 
-
-
-
-
-###Suggestions for improvements
+### Suggestions for improvements
 
 * Implement some microservices resilience patterns such as Circuit Breaker and Retry
 
 * Create an API Gateway as a common entrypoint routing requests to the services
 
-* Implement some authentication and authorization method such OAuth or JWT
+* Implement some authentication and authorization method such as OAuth or JWT
 
-* Implement a caching system with Redis to avoid unecessary hits on the mongo DB database and improve performance
+* Implement a caching system with Redis to avoid unnecessary hits on the mongo DB and improve app performance
