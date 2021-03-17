@@ -72,23 +72,23 @@ Before running the project on your local machine, please make sure that the foll
 Clone the source code.
 
 ```sh
- git clone https://github.com/nelsonjunior-developer/waes-assignment
+git clone https://github.com/nelsonjunior-developer/waes-assignment
 ```
 
 #### Running Tests
 
 ```sh
- ./buildAllProjects.sh
+./buildAllProjects.sh
 ```
 
 #### Running Integration Tests  
 ```sh
- ./runIntegrationTests.sh
+./runIntegrationTests.sh
 ```
 
 #### Building the docker images
 ```shell
- ./buildDockerImage.sh
+./buildDockerImage.sh
 ```
 
 # How to run
@@ -101,7 +101,7 @@ For starting the application after following the previous steps, you can use thi
 ## On Gradle
 Each project can be executed individually through the gradle wrapper:
 ```shell
- ./registry-service/gradlew -p registry-service bootRun
+./registry-service/gradlew -p registry-service bootRun
 ```
 
 ## Accessing the application
