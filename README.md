@@ -39,6 +39,8 @@ password: ```waes_assignment```
 
 database: ```data_diff```
 
+You can start the MongoDB using the ```docker-compose.yml``` file as is explained in the next sections.
+
 ### Recomended MongoDB GUI:
 [Robo3T](https://robomongo.org/)
 
@@ -104,6 +106,10 @@ For starting the application after following the previous steps, you can use thi
  docker-compose up -d
 ```
 ## On Gradle
+Before running the application locally with gradle, it's necessary to start the MongoDB that is configured in the ```docker-compose.yml``` file as follows:
+```shell
+docker-compose up -d mongo-database
+```
 Each project can be executed individually through the gradle wrapper:
 ```shell
 ./registry-service/gradlew -p registry-service bootRun
