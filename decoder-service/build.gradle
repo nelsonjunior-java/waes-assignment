@@ -7,9 +7,14 @@ ext {
     set('springCloudVersion', 'Hoxton.SR9')
     set('swaggerVersion', '2.9.1')
     set('lombokVersion', '1.18.12')
+    set('cucumberVersion', '5.0.0')
+    set('restAssuredVersion', '3.0.5')
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'application'
+apply from: "./gradle/tests.gradle"
 
 sourceCompatibility = '11'
 
@@ -35,6 +40,16 @@ dependencies {
     compileOnly(group: 'org.projectlombok', name: 'lombok',version: lombokVersion)
     testCompileOnly(group: 'org.projectlombok', name: 'lombok',version: lombokVersion)
     annotationProcessor(group: 'org.projectlombok', name: 'lombok',version: lombokVersion)
+
+    //Integration Tests
+    integrationTestAnnotationProcessor 'org.projectlombok:lombok'
+    integrationTestImplementation 'org.junit.vintage:junit-vintage-engine'
+    integrationTestImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+    integrationTestImplementation "io.cucumber:cucumber-junit:${cucumberVersion}"
+    integrationTestImplementation "io.cucumber:cucumber-spring:${cucumberVersion}"
+    integrationTestImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+    integrationTestImplementation "io.rest-assured:json-path:${restAssuredVersion}"
+    integrationTestImplementation "io.rest-assured:xml-path:${restAssuredVersion}"
 
 }
 

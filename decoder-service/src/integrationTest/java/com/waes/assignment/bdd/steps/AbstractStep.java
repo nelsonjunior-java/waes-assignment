@@ -2,20 +2,18 @@ package com.waes.assignment.bdd.steps;
 
 import com.waes.assignment.bdd.CucumberContextTest;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.assertj.core.api.Assertions;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.util.CollectionUtils;
-import io.restassured.response.Response;
-import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.containsString;
+import java.util.Map;
 
 /**
  * Abstract class inherited by all step definitions in order to use
  * the default behavior for using the tests API
  */
-public abstract class AbstractStep {
+public class AbstractStep {
 
     @LocalServerPort
     private int port;
@@ -102,38 +100,4 @@ public abstract class AbstractStep {
                 .log()
                 .all();
     }
-
-    /**
-     * Validates the returned status code
-     * @param status - Status code
-     */
-    protected void validateResponseCode(int... status) {
-        Assertions.assertThat(status).contains(CONTEXT.getResponse().getStatusCode());
-    }
-
-    /**
-     * Validates if the message body has a given text
-     * @param text - Text to be analyzed
-     */
-    protected void validatesResponseBodyContains(String text) {
-        CONTEXT.getResponse().then().body(containsString(text));
-    }
-
-    /**
-     * Triggers a GET request with the context information
-     * @param path - Path da API que deve ser realizado a requisição  API path that the request must be made
-     */
-    protected void executeGet(String path) {
-        final var request = createDefaultRequest(CONTEXT.getHeaders(), CONTEXT.getPathParams(), CONTEXT.getQueryParams(), CONTEXT.getPayload());
-        final var url = createEndpointUrl(path);
-
-        final var response = request.log()
-                .all()
-                .get(url);
-
-        logResponse(response);
-        CONTEXT.setResponse(response);
-    }
-
 }
-

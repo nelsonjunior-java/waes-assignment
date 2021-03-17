@@ -3,13 +3,13 @@
 
 Feature: Compare two values
 
-#  Scenario: Comparing two values using an String value as id
-#    Given I compare a left and a right value using a non numerical id value as 'my_value'
-#    Then the operation fails returning the http code 400
-#
-#  Scenario: Comparing two values using an id of a record that does not exist
-#    Given I compare a left and a right value using an id that does not exist like '1234568'
-#    Then the operation fails returning the NOT FOUND http code 404
+  Scenario: Comparing two values using an String value as id
+    Given I compare a left and a right value using a non numerical id value as 'my_value'
+    Then the operation fails returning the http code 400
+
+  Scenario: Comparing two values using an id of a record that does not exist
+    Given I compare a left and a right value using an id that does not exist like '1234568'
+    Then the operation fails returning the NOT FOUND http code 404
 
   Scenario: Comparing two values having only a left value saved
     Given I save a left encoded value on the application endpoint using the id 111
