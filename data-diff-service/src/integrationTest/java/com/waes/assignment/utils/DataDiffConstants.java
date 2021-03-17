@@ -1,5 +1,9 @@
 package com.waes.assignment.utils;
 
+/**
+ * This class has the constant values related application validations
+ *
+ */
 public class DataDiffConstants {
 
     public static final Long DIFF_RECORD_ID = 1L;

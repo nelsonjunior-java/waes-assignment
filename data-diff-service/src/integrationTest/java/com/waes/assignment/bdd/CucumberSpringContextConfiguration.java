@@ -19,7 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 public class CucumberSpringContextConfiguration {
 
     /**
-     * Hook in order to cucumber recognize the classs as a glue and load the Spring context
+     * Hook used to cucumber recognize the class as a glue and load the Spring context
      */
     @Before
     public void setUp() {

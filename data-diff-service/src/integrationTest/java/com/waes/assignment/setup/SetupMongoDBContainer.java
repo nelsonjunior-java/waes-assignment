@@ -6,7 +6,6 @@ import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.utility.DockerImageName;
 
-
 /**
  * This class is used to setup a MongoDB container
  * used in the integration tests

@@ -70,6 +70,8 @@ public class DiffController {
     @GetMapping("/{id}")
     public ResponseEntity<DiffResponse> getValuesDifference(@PathVariable("id") Long id) throws BusinessRuleException {
 
+        log.info("method=getValuesDifference, id={}", id);
+
         var diffRecord = diffComparisonService.getDifferenceBetweenValues(id);
 
         return ResponseEntity.ok(DiffResponse.from(diffRecord));

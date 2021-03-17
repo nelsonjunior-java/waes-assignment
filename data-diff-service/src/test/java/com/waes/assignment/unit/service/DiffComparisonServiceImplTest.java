@@ -29,6 +29,9 @@ import static com.waes.assignment.utils.DataDiffConstants.DIFF_RECORD_WAITING_EQ
 import static com.waes.assignment.utils.DataDiffConstants.DIFF_RECORD_DIFFERENT_SIZE_STATUS;
 import static com.waes.assignment.utils.DataDiffConstants.DIFF_RECORD_SAME_SIZE_WITH_DIFFERENCES_STATUS;
 
+/**
+ * This class unit tests the service DiffComparisonServiceImpl
+ */
 @ExtendWith(MockitoExtension.class)
 public class DiffComparisonServiceImplTest {
 

@@ -12,7 +12,6 @@ server:
 eureka:
   instance:
     appname: data-diff-service
-    #hostname: localhost
     instanceId: ${spring.application.name}:${eureka.instance.appname}:${random.value}
   client:
     serviceUrl:

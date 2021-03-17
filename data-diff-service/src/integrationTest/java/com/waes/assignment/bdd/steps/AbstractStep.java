@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.util.CollectionUtils;
 import io.restassured.response.Response;
+
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -24,6 +25,7 @@ public abstract class AbstractStep {
 
     /**
      * Adds a new path param to the request
+     *
      * @param json - payload JSON
      */
     protected void addToPayload(String json) {
@@ -32,6 +34,7 @@ public abstract class AbstractStep {
 
     /**
      * Creates a POST request with the context information
+     *
      * @param path - API Path that will be used in the request
      */
     protected void executePost(String path) {
@@ -48,7 +51,8 @@ public abstract class AbstractStep {
 
     /**
      * Creates a default Request for using on any RestAssured Request
-     * @param headers  - Request Headers
+     *
+     * @param headers     - Request Headers
      * @param pathParams  - Endpoint Path params
      * @param queryParams - Endpoint Query params
      * @param payload     - Request JSON payload
@@ -79,6 +83,7 @@ public abstract class AbstractStep {
 
     /**
      * Creates the endpoint URL from a base URL + request path
+     *
      * @param path - Endpoint path
      * @return Endpoint with base URL and API path
      */
@@ -95,6 +100,7 @@ public abstract class AbstractStep {
 
     /**
      * Logs the information returned on the API response
+     *
      * @param response - RestAssured response Object
      */
     private void logResponse(Response response) {
@@ -105,6 +111,7 @@ public abstract class AbstractStep {
 
     /**
      * Validates the returned status code
+     *
      * @param status - Status code
      */
     protected void validateResponseCode(int... status) {
@@ -113,6 +120,7 @@ public abstract class AbstractStep {
 
     /**
      * Validates if the message body has a given text
+     *
      * @param text - Text to be analyzed
      */
     protected void validatesResponseBodyContains(String text) {
@@ -121,6 +129,7 @@ public abstract class AbstractStep {
 
     /**
      * Triggers a GET request with the context information
+     *
      * @param path - Path da API que deve ser realizado a requisição  API path that the request must be made
      */
     protected void executeGet(String path) {

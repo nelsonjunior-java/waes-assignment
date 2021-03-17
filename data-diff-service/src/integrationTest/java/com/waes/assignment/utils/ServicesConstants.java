@@ -1,5 +1,9 @@
 package com.waes.assignment.utils;
 
+/**
+ * This class has the constant values related to all the data-diff-service
+ *
+ */
 public class ServicesConstants {
 
     /**

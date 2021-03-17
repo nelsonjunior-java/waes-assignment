@@ -13,7 +13,9 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+/**
+ * Class responsible for unit testing the ValueDifferenceComparatorImpl class
+ */
 @ExtendWith(MockitoExtension.class)
 public class ValueDifferenceComparatorImplTest {
 

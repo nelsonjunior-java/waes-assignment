@@ -9,6 +9,9 @@ import static com.waes.assignment.utils.DataDiffConstants.DIFF_RECORD_WAITING_EQ
 import static com.waes.assignment.utils.DataDiffConstants.BIGGER_SIZE_NON_BASE64_DIFF_VALUE;
 import static com.waes.assignment.utils.DataDiffConstants.SAME_SIZE_NOT_EQUAL_NON_BASE64_DIFF_VALUE;
 
+/**
+ * Class used to created default objects to be used as mock in the unit tests
+ */
 public class MockedDiffRecordResponse {
 
     public static final DiffRecord MOCK_1 = new DiffRecord(DIFF_RECORD_ID,NON_BASE64_DIFF_VALUE,NON_BASE64_DIFF_VALUE,DIFF_RECORD_WAITING_EVALUATION_STATUS, null);

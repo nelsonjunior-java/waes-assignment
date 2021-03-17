@@ -7,11 +7,9 @@ ext {
     set('springCloudVersion', 'Hoxton.SR9')
     set('swaggerVersion', '2.9.1')
     set('commonsCodecVersion', '1.15')
-    set('resilience4jVersion', '1.7.0')
     set('lombokVersion', '1.18.12')
     set('cucumberVersion', '5.0.0')
     set('restAssuredVersion', '3.0.5')
-    set('flapdoodleMongoVersion', '2.2.0')
     set('testContainersVersion', '1.15.0-rc2')
 }
 
