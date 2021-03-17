@@ -4,10 +4,13 @@ import com.waes.assignment.bdd.CucumberContextTest;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.assertj.core.api.Assertions;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Map;
+
+import static org.hamcrest.CoreMatchers.containsString;
 
 /**
  * Abstract class inherited by all step definitions in order to use
@@ -99,5 +102,21 @@ public class AbstractStep {
         response.then()
                 .log()
                 .all();
+    }
+
+    /**
+     * Validates the returned status code
+     * @param status - Status code
+     */
+    protected void validateResponseCode(int... status) {
+        Assertions.assertThat(status).contains(CONTEXT.getResponse().getStatusCode());
+    }
+
+    /**
+     * Validates if the message body has a given text
+     * @param text - Text to be analyzed
+     */
+    protected void validatesResponseBodyContains(String text) {
+        CONTEXT.getResponse().then().body(containsString(text));
     }
 }
