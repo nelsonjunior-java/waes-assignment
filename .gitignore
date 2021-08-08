@@ -1,5 +1,9 @@
+#Gradle
 build/
 .gradle
+
+# IDE
+.idea/
 
 # Compiled class file
 *.class
@@ -13,8 +17,9 @@ build/
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Package Files (with an exception for gradle wrapper jar file) #
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 *.war
 *.nar
 *.ear

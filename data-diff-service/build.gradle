@@ -19,6 +19,7 @@ apply plugin: 'application'
 apply from: "./gradle/tests.gradle"
 
 sourceCompatibility = '11'
+mainClassName = 'com.waes.assignment.DataDiffServiceApplication'
 
 repositories {
     mavenCentral()
